@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FishCup Links</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+
+body{
+  background:#000;
+  min-height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
+
+/* ===== BACKGROUND ===== */
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ===== GLASS SHARDS BACKGROUND ===== */
+.bg-shard{
+  position:absolute;
+  bottom:-100px;
+  background:linear-gradient(180deg,rgba(255,0,0,.9),transparent);
+  filter:drop-shadow(0 0 8px red);
+  opacity:.7;
+  animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0) rotate(0deg);opacity:0}
+  20%{opacity:.8}
+  to{transform:translateY(-140vh) rotate(720deg);opacity:0}
+}
+
+/* ===== RED WIND ===== */
+.wind{
+  position:absolute;
+  bottom:-200px;
+  width:140px;
+  height:500px;
+  background:linear-gradient(180deg,transparent,rgba(255,0,0,.5),transparent);
+  filter:blur(40px);
+  opacity:.6;
+  animation:windUp linear infinite;
+}
+
+@keyframes windUp{
+  from{transform:translateY(0);opacity:0}
+  20%{opacity:.6}
+  to{transform:translateY(-160vh);opacity:0}
+}
+
+/* ===== CONTENT ===== */
+.container{
+  position:relative;
+  z-index:5;
+  width:100%;
+  max-width:380px;
+  padding:25px;
+  text-align:center;
+}
+
+.avatar{
+  width:90px;height:90px;
+  border-radius:50%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:red;
+  font-size:36px;
+  box-shadow:0 0 20px red,0 0 40px rgba(255,0,0,.7);
+  margin-bottom:15px;
+}
+
+h1{text-shadow:0 0 12px red}
+p{opacity:.7;margin-bottom:25px}
+
+/* ===== BUTTON ===== */
+.link{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  gap:12px;
+  padding:15px;
+  margin-bottom:16px;
+  border-radius:14px;
+  text-decoration:none;
+  color:white;
+  background:#050505;
+  border:1px solid rgba(255,0,0,.5);
+  box-shadow:0 0 15px rgba(255,0,0,.6), inset 0 0 10px rgba(255,0,0,.4);
+  transition:.2s;
+}
+
+.link:active{transform:scale(.96)}
+.link i{color:red;font-size:22px;width:28px}
+
+/* ===== BUTTON SHARDS ===== */
+.btn-shard{
+  position:absolute;
+  width:8px;
+  height:22px;
+  background:linear-gradient(180deg,red,transparent);
+  filter:drop-shadow(0 0 6px red);
+  pointer-events:none;
+  animation:btnShard .7s ease-out forwards;
+}
+
+@keyframes btnShard{
+  from{transform:translate(0,0) rotate(0deg);opacity:1}
+  to{transform:translate(var(--x),var(--y)) rotate(360deg);opacity:0}
+}
+
+footer{opacity:.5;font-size:12px;margin-top:20px}
+</style>
+</head>
+<body>
+
+<div class="bg" id="bg"></div>
+
+<div class="container">
+  <div class="avatar">FC</div>
+  <h1>FishCup</h1>
+  <p>Red Wind • Glass Effect</p>
+
+  <a class="link" data-href="https://wa.me/6283865556942"><i class="fab fa-whatsapp"></i>WhatsApp</a>
+  <a class="link" data-href="https://www.tiktok.com/@rifqy.mi?_r=1&_t=ZS-93hGbIseGNZ"><i class="fab fa-tiktok"></i>TikTok</a>
+  <a class="link" data-href="https://youtube.com/@fishcup44?si=66dNEpJdvHgD2jVC"><i class="fab fa-youtube"></i>YouTube</a>
+  <a class="link" data-href="https://rifqy-devlop.github.io/Gaploy/blackhile.html"><i class="fas fa-bullhorn"></i>RATING ME</a>
+
+  <footer>© 2026 FishCup</footer>
+</div>
+
+<script>
+const bg=document.getElementById("bg");
+
+/* polygon random */
+function poly(){
+  let p=[],c=4+Math.floor(Math.random()*4);
+  for(let i=0;i<c;i++)p.push(`${Math.random()*100}% ${Math.random()*100}%`);
+  return `polygon(${p})`;
+}
+
+/* background shards */
+for(let i=0;i<35;i++){
+  let s=document.createElement("div");
+  s.className="bg-shard";
+  s.style.width=6+Math.random()*18+"px";
+  s.style.height=20+Math.random()*60+"px";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDuration=6+Math.random()*8+"s";
+  s.style.animationDelay=Math.random()*6+"s";
+  s.style.clipPath=poly();
+  bg.appendChild(s);
+}
+
+/* wind */
+for(let i=0;i<10;i++){
+  let w=document.createElement("div");
+  w.className="wind";
+  w.style.left=Math.random()*100+"%";
+  w.style.animationDuration=8+Math.random()*10+"s";
+  w.style.animationDelay=Math.random()*8+"s";
+  bg.appendChild(w);
+}
+
+/* button shards */
+document.querySelectorAll(".link").forEach(btn=>{
+  btn.addEventListener("click",e=>{
+    e.preventDefault();
+    for(let i=0;i<12;i++){
+      let s=document.createElement("div");
+      s.className="btn-shard";
+      s.style.left="50%";
+      s.style.top="50%";
+      s.style.clipPath=poly();
+      s.style.setProperty("--x",(Math.random()*140-70)+"px");
+      s.style.setProperty("--y",(Math.random()*140-70)+"px");
+      btn.appendChild(s);
+      setTimeout(()=>s.remove(),700);
+    }
+    setTimeout(()=>location.href=btn.dataset.href,200);
+  });
+});
+</script>
+
+</body>
+</html>
